@@ -1,12 +1,45 @@
 package com.example.task1
 
+import javafx.scene.paint.Stop
 import java.io.BufferedReader
 import java.io.File
 import java.io.FileReader
+import java.util.Scanner
 import kotlin.math.sqrt
 
-fun main(args: Array<String>) {
+fun main() {
+    // Інтерактивний режим
 
+    println("Enter between 1 and 2\n1 is for interactive mode, 2 is for noninteractive")
+    val meth = readlnOrNull()?.toInt()
+
+    println("You choose: $meth")
+
+    if (meth != null && true) {
+        if (meth.toInt() !== 1 && meth.toInt() !== 2) {
+            println("Choose number between 1 and 2")
+            return
+        }
+    }
+    println(meth)
+    when {
+        meth == 1 -> interact()
+        meth == 2 -> noninteract()
+    }
+}
+
+fun interact() {
+    val scanner = Scanner(System.`in`)
+
+    println("Enter a:")
+    val a = scanner.nextInt()
+    println("Enter b:")
+    val b = scanner.nextInt()
+    println("Enter c:")
+    val c = scanner.nextInt()
+
+}
+fun noninteract() {
     // Неінтерактивний режим
     val filename = "src/main/kotlin/com/example/task1/config.properties"
     val file = File(filename)
@@ -32,7 +65,7 @@ fun main(args: Array<String>) {
 
     println("Equation: (" + index[0] + ") * x^2 + (" + index[1] + ") * x + (" + index[2] + ")")
 
-    val D = (index[1] * index[1] - 4 * index[0] * index[2]).toDouble()
+    val D = (index[1] * index[1] - 4 * index[0] * index[2])
     println("D = $D")
 
     if (D > 0.toDouble()) {
