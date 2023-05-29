@@ -1,44 +1,66 @@
 package com.example.task1
 
-import javafx.scene.paint.Stop
 import java.io.BufferedReader
 import java.io.File
 import java.io.FileReader
-import java.util.Scanner
 import kotlin.math.sqrt
 
 fun main() {
-    // Інтерактивний режим
+    // Вибирання режиму: 1 - інтерактивний, 2 - файловий
 
     println("Enter between 1 and 2\n1 is for interactive mode, 2 is for noninteractive")
     val meth = readlnOrNull()?.toInt()
 
     println("You choose: $meth")
 
-    if (meth != null && true) {
+    if (meth != null) {
         if (meth.toInt() !== 1 && meth.toInt() !== 2) {
             println("Choose number between 1 and 2")
             return
         }
     }
-    println(meth)
-    when {
-        meth == 1 -> interact()
-        meth == 2 -> noninteract()
+
+    when (meth) {
+        1 -> interact()
+        2 -> noninteract()
     }
 }
 
 fun interact() {
-    val scanner = Scanner(System.`in`)
+    // Інтерактивний режим
+    println("a =")
+    val a : Double? = readlnOrNull()?.toDouble()
+    println("b =")
+    val b : Double? = readlnOrNull()?.toDouble()
+    println("c =")
+    val c : Double? = readlnOrNull()?.toDouble()
 
-    println("Enter a:")
-    val a = scanner.nextInt()
-    println("Enter b:")
-    val b = scanner.nextInt()
-    println("Enter c:")
-    val c = scanner.nextInt()
+    if( a !is Number  || b !is Number || c !is Number) {
+        println("Error. Expected a valid real number")
+        return interact()
+    }
 
+    val d = (b!! * b!! - 4 * a!! * c!!)
+
+    println("D = $d")
+
+    if (d < 0) {
+        println("D < 0. Equation don't have roots as real numbers")
+        return
+    }
+
+    if (d == 0.toDouble()) {
+        val x = (-b / 2 * a)
+        println("x = $x\nThere are 1 root")
+    }
+
+    if (d > 0) {
+        val x1 = (-b + sqrt(d)) / (2 * a)
+        val x2 = (-b - sqrt(d)) / (2 * a)
+        println("x1 =  $x1\nx2 =  $x2\nThere are 2 roots")
+    }
 }
+
 fun noninteract() {
     // Неінтерактивний режим
     val filename = "src/main/kotlin/com/example/task1/config.properties"
